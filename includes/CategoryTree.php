@@ -20,6 +20,7 @@
  * @file
  * @ingroup Extensions
  * @author Daniel Kinzler, brightbyte.de
+ * @author thomas-topway-it (search-input)
  */
 
 namespace MediaWiki\Extension\CategoryTree;
@@ -336,10 +337,11 @@ class CategoryTree {
 	 * @param array $attr
 	 * @param int $depth
 	 * @param bool $allowMissing
+	 * @param bool $searchInput
 	 * @return bool|string
 	 */
 	public function getTag( ?Parser $parser, $category, $hideroot = false, array $attr = [],
-		$depth = 1, $allowMissing = false
+		$depth = 1, $allowMissing = false, $searchInput
 	) {
 		global $wgCategoryTreeDisableCache;
 
@@ -383,6 +385,14 @@ class CategoryTree {
 			} else {
 				$html = $this->renderChildren( $title, $depth );
 			}
+		}
+
+		if ( $searchInput ) {
+			$html = Html::rawElement( 'div', [],
+				Html::element( 'input', [
+					'class' => 'CategoryTreeSearchInput',
+				], null ) )
+				. $html;
 		}
 
 		return Html::rawElement( 'div', $attr, $html );
