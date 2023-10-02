@@ -205,13 +205,14 @@ class Hooks implements
 		$onlyroot = isset( $argv['onlyroot'] )
 			? CategoryTree::decodeBoolean( $argv['onlyroot'] ) : null;
 		$depthArg = isset( $argv['depth'] ) ? (int)$argv['depth'] : null;
+		$searchInput = isset( $argv['searchinput'] );
 
 		$depth = CategoryTree::capDepth( $ct->getOption( 'mode' ), $depthArg );
 		if ( $onlyroot ) {
 			$depth = 0;
 		}
 
-		return $ct->getTag( $parser, $cat, $hideroot, $attr, $depth, $allowMissing );
+		return $ct->getTag( $parser, $cat, $hideroot, $attr, $depth, $allowMissing, $searchInput );
 	}
 
 	/**
