@@ -173,3 +173,9 @@
 .CategoryTreeNotice {
 	font-style: italic;
 }
+
+.CategoryTreeSearch {
+	font-style: italic;
+	color: #8b0000;
+	font-weight: bold;
+}
