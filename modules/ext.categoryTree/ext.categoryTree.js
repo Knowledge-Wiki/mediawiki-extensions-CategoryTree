@@ -21,11 +21,46 @@
  * @file
  * @ingroup Extensions
  * @author Daniel Kinzler, brightbyte.de
+ * @author thomas-topway-it for K-MA (search-input)
  */
 
 ( function () {
 	var loadChildren,
 		data = require( './data.json' );
+
+	/**
+	 * filter nodes through search-input
+	 */
+	$( '.CategoryTreeSearchInput' ).keyup(function () {
+		var searchString = $( this ).val();
+	
+		var matches = 0;
+		$( this ).closest( '.CategoryTreeTag' ).find( '.CategoryTreeItem' ).each( function() {
+			var item = this;
+
+			$( this ).find( 'a' ).each(function( el ) {
+				var match = ( $(this).text().toLowerCase()
+					.indexOf( searchString.toLowerCase() ) !== -1 );
+
+				if ( match ) {
+					matches++;
+				}
+				$( item ).toggle( match );
+
+				const regex = new RegExp( searchString, 'gi' );
+				let text = $( this ).text().replace( /(<span class="CategoryTreeSearch">|<\/span> )/gim, '' );
+				$( this ).html( text.replace(regex, '<span class="CategoryTreeSearch">$&</span>' ) );
+			})
+
+		});
+		
+		if ( !matches) {
+			$( this ).closest( '.CategoryTreeTag' ).find( '.CategoryTreeItem' ).each( function() {
+				$( item ).toggle( true );
+			} );
+		}
+
+	});
 
 	/**
 	 * Expands a given node (loading it's children if not loaded)
