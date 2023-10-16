@@ -329,7 +329,7 @@ class CategoryTree {
 	 * @return bool|string
 	 */
 	public function getTag( ?Parser $parser, $category, $hideroot = false, array $attr = [],
-		$depth = 1, $allowMissing = false, $searchInput
+		$depth = 1, $allowMissing = false, $searchInput = false
 	) {
 		global $wgCategoryTreeDisableCache;
 
