@@ -99,3 +99,9 @@
 .CategoryTreeSection {
 	direction: ltr;
 }
+
+.CategoryTreeSearch {
+	font-style: italic;
+	color: #8b0000;
+	font-weight: bold;
+}
