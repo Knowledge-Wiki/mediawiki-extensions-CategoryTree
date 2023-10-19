@@ -387,10 +387,9 @@ class CategoryTree {
 		}
 
 		if ( $searchInput ) {
-			$html = Html::rawElement( 'div', [],
-				Html::element( 'input', [
+			$html = Html::element( 'input', [
 					'class' => 'CategoryTreeSearchInput',
-				], null ) )
+				], null )
 				. $html;
 		}
 
