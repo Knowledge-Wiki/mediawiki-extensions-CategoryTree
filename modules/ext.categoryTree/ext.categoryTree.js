@@ -47,7 +47,7 @@
 				}
 				$( item ).toggle( match );
 
-				const regex = new RegExp( searchString, 'gi' );
+				const regex = new RegExp( searchString.replace(/\\/g, '&#92;'), 'gi' );
 				let text = $( this ).text().replace( /(<span class="CategoryTreeSearch">|<\/span> )/gim, '' );
 				$( this ).html( text.replace(regex, '<span class="CategoryTreeSearch">$&</span>' ) );
 			})
@@ -56,6 +56,7 @@
 		
 		if ( !matches) {
 			$( this ).closest( '.CategoryTreeTag' ).find( '.CategoryTreeItem' ).each( function() {
+				var item = this;
 				$( item ).toggle( true );
 			} );
 		}
