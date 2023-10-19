@@ -364,6 +364,12 @@ class CategoryTree {
 		$html = '';
 		$html .= Html::openElement( 'div', $attr );
 
+		if ( $searchInput ) {
+			$html .= Html::element( 'input', [
+				'class' => 'CategoryTreeSearchInput',
+			], null );
+		}
+
 		if ( !$allowMissing && !$title->getArticleID() ) {
 			$html .= Html::openElement( 'span', [ 'class' => 'CategoryTreeNotice' ] );
 			if ( $parser ) {
@@ -379,14 +385,6 @@ class CategoryTree {
 			} else {
 				$html .= $this->renderChildren( $title, $depth );
 			}
-		}
-
-		if ( $searchInput ) {
-			$html = Html::rawElement( 'div', [],
-				Html::element( 'input', [
-					'class' => 'CategoryTreeSearchInput',
-				], null ) )
-				. $html;
 		}
 
 		$html .= Xml::closeElement( 'div' );
